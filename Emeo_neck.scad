@@ -8,58 +8,61 @@ eps = 0.01;
 // Cap varialbes.
 capThickness = 3;
 
-// Tube variables.
-tubeDiameter = 15.4;
-tubeBottomDiameterDifference = 1;
-tubeTopDiameterDifference = 1;
+// Insertion tube for Emeo recpetical,
+insTubeDiameterTop = 15.4;
+insTubeDiameterBottom = 14.72;
 
-tubeMouthpieceDiameterTop = 15;
-tubeMouthpieceDiameterDifference = 1;
-
-tubeThickness = 2;
+insTubeMouthpieceDiameterTop = 15;
+insTubeDiameterInterior = 4;
 
 // This is the depth of the Emeo receptical hole.
-tubeBottomLength = 14.5;
-// This is the part of the tube to be inserted in the mouthpiece.
-tubeMouthpieceLength = 25;
-// This is the length of the tube extending above the cap.
-tubeTopLength = 40;
-// Total tube length
-tubeLength = tubeBottomLength + capThickness + tubeTopLength;
+insTubeBottomLength = 10;
 
-module tubeBottom () {
+
+// Insertion tube for the mouthpiece that came with the Emeo.
+insTubeMpcLength = 20;
+insTubeMpcDiameterBottom = 16.4;
+insTubeMpcDiameterTop = 15.75;
+
+// This is the length of the tube between the cap and the insTubeMpc.
+TubeLength = 40;
+
+// Total insTube length
+//insTubeLength = insTubeBottomLength + capThickness + insTubeTopLength;
+
+module insTubeBottom () {
         
     difference() {
-        cylinder(h = tubeBottomLength, 
-                 r1 = tubeDiameter - tubeBottomDiameterDifference,
-                 r2 = tubeDiameter);
+        cylinder(h = insTubeBottomLength, 
+                 r1 = insTubeDiameterBottom,
+                 r2 = insTubeDiameterTop);
 
-        cylinder(h = tubeBottomLength, 
-                 r1 = tubeDiameter - tubeThickness - tubeBottomDiameterDifference,
-                 r2 = tubeDiameter - tubeThickness);
+        cylinder(h = insTubeBottomLength, 
+                 r1 = insTubeDiameterInterior,
+                 r2 = insTubeDiameterInterior);
     }
 
 }
 
-module tubeMouthpiece() {
+module insTubeMouthpiece() {
 
     difference() {
-        cylinder(h = tubeMouthpieceLength, 
-                 r1 = tubeMouthpieceDiameterTop + tubeMouthpieceDiameterDifference,
-                 r2 = tubeMouthpieceDiameterTop);
+        cylinder(h = insTubeMpcLength, 
+                 r1 = insTubeMpcDiameterBottom,
+                 r2 = insTubeMpcDiameterTop);
 
-        cylinder(h = tubeMouthpieceLength, 
-                 r1 = tubeDiameter - tubeThickness,
-                 r2 = tubeDiameter - tubeThickness);
+        cylinder(h = insTubeMpcLength, 
+                 r1 = insTubeDiameterInterior,
+                 r2 = insTubeDiameterInterior);
     }
     
 }
 
 module tube() {
 
-    tubeBottom();
+    insTubeBottom();
     
     translate([0,0,20]) 
-        tubeMouthpiece();
+        insTubeMouthpiece();
 }
 tube();
