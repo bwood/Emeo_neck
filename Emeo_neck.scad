@@ -27,8 +27,16 @@ insTubeMpcDiameterTop = 15.75;
 // This is the length of the tube between the cap and the insTubeMpc.
 TubeLength = 40;
 
+// Flexble (NinjaFlex) ring
+// TODO: outter edges should be less than actual diameter. Flex material should be at actual diameter.
+flexRingLengthDiff = 4;
+flexRingThickness = 1;
+
+
 // Total insTube length
 //insTubeLength = insTubeBottomLength + capThickness + insTubeTopLength;
+
+
 
 module insTubeBottom () {
         
@@ -40,29 +48,51 @@ module insTubeBottom () {
         cylinder(h = insTubeBottomLength, 
                  r1 = insTubeDiameterInterior,
                  r2 = insTubeDiameterInterior);
+  
     }
 
+}
+
+// This cutout houses the flexible ring
+module insTubeMpcCutout() {
+    difference() {
+        cylinder(h = insTubeMpcLength - flexRingLengthDiff, 
+                 r1 = insTubeMpcDiameterBottom + 5,
+                 r2 = insTubeMpcDiameterTop + 5);
+
+        cylinder(h = insTubeMpcLength - flexRingLengthDiff, 
+                 r1 = insTubeMpcDiameterBottom - flexRingThickness,
+                 r2 = insTubeMpcDiameterTop - flexRingThickness);
+    }
+    
 }
 
 module insTubeMouthpiece() {
 
     difference() {
-        cylinder(h = insTubeMpcLength, 
-                 r1 = insTubeMpcDiameterBottom,
-                 r2 = insTubeMpcDiameterTop);
+        difference() {
+            cylinder(h = insTubeMpcLength, 
+                     r1 = insTubeMpcDiameterBottom,
+                     r2 = insTubeMpcDiameterTop);
 
-        cylinder(h = insTubeMpcLength, 
-                 r1 = insTubeDiameterInterior,
-                 r2 = insTubeDiameterInterior);
+            cylinder(h = insTubeMpcLength, 
+                     r1 = insTubeDiameterInterior,
+                     r2 = insTubeDiameterInterior);
+           
+        }
+        
+        translate([0, 0, flexRingLengthDiff / 2])
+            insTubeMpcCutout();
     }
     
 }
 
-module tube() {
+module neck() {
 
     insTubeBottom();
     
     translate([0,0,20]) 
         insTubeMouthpiece();
 }
-tube();
+//neck();
+insTubeMouthpiece();
