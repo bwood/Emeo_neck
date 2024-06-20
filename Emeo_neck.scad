@@ -15,7 +15,7 @@ insTubeDiameterBottom = 14.72;
 insTubeMouthpieceDiameterTop = 15;
 insTubeDiameterInterior = 4;
 
-// This is the depth of the Emeo receptical hole.
+// The depth of the Emeo receptical hole is 14.7. The insTube will go in this far:
 insTubeBottomLength = 10;
 
 
@@ -24,13 +24,17 @@ insTubeMpcLength = 20;
 insTubeMpcDiameterBottom = 16.4;
 insTubeMpcDiameterTop = 15.75;
 
+// The insTubes should clear the recpeticals by this much. 
+// Contact will be made by the flexible rings.
+insTubeClearance = 1;
+
 // This is the length of the tube between the cap and the insTubeMpc.
 TubeLength = 40;
 
 // Flexble (NinjaFlex) ring
 // TODO: outter edges should be less than actual diameter. Flex material should be at actual diameter.
 flexRingLengthDiff = 4;
-flexRingThickness = 1;
+flexRingThickness = 2;
 
 
 // Total insTube length
@@ -54,15 +58,15 @@ module insTubeBottom () {
 }
 
 // This cutout houses the flexible ring
-module insTubeMpcCutout() {
+module insTubeMpcFlexRing() {
     difference() {
         cylinder(h = insTubeMpcLength - flexRingLengthDiff, 
-                 r1 = insTubeMpcDiameterBottom + 5,
-                 r2 = insTubeMpcDiameterTop + 5);
+                 r1 = insTubeMpcDiameterBottom,
+                 r2 = insTubeMpcDiameterTop);
 
         cylinder(h = insTubeMpcLength - flexRingLengthDiff, 
-                 r1 = insTubeMpcDiameterBottom - flexRingThickness,
-                 r2 = insTubeMpcDiameterTop - flexRingThickness);
+                 r1 = insTubeMpcDiameterBottom - insTubeClearance - flexRingThickness,
+                 r2 = insTubeMpcDiameterTop - insTubeClearance - flexRingThickness);
     }
     
 }
@@ -72,8 +76,8 @@ module insTubeMouthpiece() {
     difference() {
         difference() {
             cylinder(h = insTubeMpcLength, 
-                     r1 = insTubeMpcDiameterBottom,
-                     r2 = insTubeMpcDiameterTop);
+                     r1 = insTubeMpcDiameterBottom - insTubeClearance,
+                     r2 = insTubeMpcDiameterTop - insTubeClearance);
 
             cylinder(h = insTubeMpcLength, 
                      r1 = insTubeDiameterInterior,
@@ -82,7 +86,7 @@ module insTubeMouthpiece() {
         }
         
         translate([0, 0, flexRingLengthDiff / 2])
-            insTubeMpcCutout();
+            insTubeMpcFlexRing();
     }
     
 }
