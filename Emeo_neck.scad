@@ -98,5 +98,4 @@ module neck() {
     translate([0,0,20]) 
         insTubeMouthpiece();
 }
-//neck();
-insTubeMouthpiece();
+neck();
