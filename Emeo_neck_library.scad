@@ -15,7 +15,8 @@ insTubeDiameterBottom = 14.72;
 insTubeMouthpieceDiameterTop = 15;
 insTubeDiameterInterior = 4;
 
-// The depth of the Emeo receptical hole is 14.7. The insTube will go in this far:
+// The depth of the Emeo receptical hole is 14.7 mm deep. 
+// The insTube will insert to the depth specified by this variable and will be flush with the top of the recepticle.
 insTubeBottomLength = 10;
 
 
@@ -28,7 +29,7 @@ insTubeMpcDiameterTop = 15.75;
 // Contact will be made by the flexible rings.
 insTubeClearance = 1;
 
-// This is the length of the tube between the cap and the insTubeMpc.
+// This is the length of the tube between the insTubeBottom and the insTubeMpc.
 TubeLength = 40;
 
 // Flexble (NinjaFlex) ring
@@ -43,7 +44,7 @@ flexRingTightness = 1;
 //insTubeLength = insTubeBottomLength + capThickness + insTubeTopLength;
 
 // Flexible ring. 
-module insTubeMpcFlexRing(length, diameterBottom, diameterTop) {
+module flexRing(length, diameterBottom, diameterTop, flexRingTightness = 0) {
     difference() {
         // Outer surface.
         cylinder(h = length - flexRingLengthDiff,
