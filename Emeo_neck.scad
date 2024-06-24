@@ -1,4 +1,4 @@
-use <./Emeo_neck_variables.scad>
+include <./Emeo_neck_library.scad>
 
 module insTubeBottom () {
         
@@ -29,6 +29,7 @@ module insTubeMouthpiece() {
            
         }
         
+        // Cutout for the flex ring.
         translate([0, 0, flexRingLengthDiff / 2])
             insTubeMpcFlexRing(
                                 length = insTubeMpcLength,

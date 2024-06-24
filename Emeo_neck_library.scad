@@ -32,24 +32,28 @@ insTubeClearance = 1;
 TubeLength = 40;
 
 // Flexble (NinjaFlex) ring
-// TODO: outter edges should be less than actual diameter. Flex material should be at actual diameter.
+// Difference in length between the insTube and the flex ring.  The ring sits inside the lips this creates in the insTube.
 flexRingLengthDiff = 4;
-flexRingThickness = 2;
+// Reduce the interior diameter of the flex ring by this much to ensure a snug fit. This will also thicken the flex ring somewhat. Careful...
+//TODO: Why loose lips when this is 0?
+flexRingTightness = 1;
 
 
 // Total insTube length
 //insTubeLength = insTubeBottomLength + capThickness + insTubeTopLength;
 
-// This cutout houses the flexible ring
+// Flexible ring. 
 module insTubeMpcFlexRing(length, diameterBottom, diameterTop) {
     difference() {
+        // Outer surface.
         cylinder(h = length - flexRingLengthDiff,
                  r1 = diameterBottom,
                  r2 = diameterTop);
-
+        //Inner surface.
+        // TODO: should flexRingThickness be subtracted? w/out this we are at surface of insTube
         cylinder(h = length - flexRingLengthDiff,
-                 r1 = diameterBottom - insTubeClearance - flexRingThickness,
-                 r2 = diameterTop - insTubeClearance - flexRingThickness);
+                 r1 = diameterBottom - insTubeClearance - flexRingTightness,
+                 r2 = diameterTop - insTubeClearance - flexRingTightness);
     }
 
 }
