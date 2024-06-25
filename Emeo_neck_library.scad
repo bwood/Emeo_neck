@@ -2,6 +2,9 @@
 // CHANGE to 100 when you create the STL.
 $fn = 20;
 
+// If true, echo debug info to console.
+debug = true;
+
 // Epsilon. This small value guarantees overlap and solves the warning: "Object may not be a valid 2-manifold and may need repair!"
 eps = 0.01;
 
@@ -35,9 +38,10 @@ TubeLength = 40;
 // Flexble (NinjaFlex) ring
 // Difference in length between the insTube and the flex ring.  The ring sits inside the lips this creates in the insTube.
 flexRingLengthDiff = 4;
+// The depth of the flex ring cutouts in the insertion tubes.
+flexRingDiameterDiff = 2;
 // Reduce the interior diameter of the flex ring by this much to ensure a snug fit. This will also thicken the flex ring somewhat. Careful...
-//TODO: Why loose lips when this is 0?
-flexRingTightness = 1;
+flexRingTightness = 0;
 
 
 // Total insTube length
@@ -45,16 +49,36 @@ flexRingTightness = 1;
 
 // Flexible ring. 
 module flexRing(length, diameterBottom, diameterTop, flexRingTightness = 0) {
+    
+    frLength = length - flexRingLengthDiff;
+    r1Outer = diameterBottom;
+    r2Outer = diameterTop;
+    r1Inner = diameterBottom - insTubeClearance - flexRingDiameterDiff - flexRingTightness;
+    r2Inner = diameterTop - insTubeClearance - flexRingDiameterDiff - flexRingTightness;
+    
+    if (debug) {
+        echo("");
+        echo("Function: flexRing");
+        echo("frLength = ", frLength);
+        echo("insTubeClearance = ", insTubeClearance);
+        echo("flexRingDiameterDiff = ", flexRingDiameterDiff);
+        echo("flexRingTightness = ", flexRingTightness);
+        echo("r1Outer = ", r1Outer);
+        echo("r2Outer =", r2Outer);
+        echo("r1Inner = ", r1Inner);
+        echo("r2Inner = ", r2Inner);
+    }
+    
     difference() {
         // Outer surface.
-        cylinder(h = length - flexRingLengthDiff,
-                 r1 = diameterBottom,
-                 r2 = diameterTop);
+        cylinder(h = frLength,
+                 r1 = r1Outer,
+                 r2 = r2Outer);
         //Inner surface.
         // TODO: should flexRingThickness be subtracted? w/out this we are at surface of insTube
-        cylinder(h = length - flexRingLengthDiff,
-                 r1 = diameterBottom - insTubeClearance - flexRingTightness,
-                 r2 = diameterTop - insTubeClearance - flexRingTightness);
+        cylinder(h = frLength,
+                 r1 = r1Inner,
+                 r2 = r2Inner);
     }
 
 }
