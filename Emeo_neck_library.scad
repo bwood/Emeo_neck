@@ -48,11 +48,18 @@ flexRingTightness = 0;
 //insTubeLength = insTubeBottomLength + capThickness + insTubeTopLength;
 
 // Flexible ring. 
-module flexRing(length, diameterBottom, diameterTop, flexRingTightness = 0) {
+module flexRing(
+                length, 
+                diameterBottom, 
+                diameterTop, 
+                flexRingOuterClearance = 0, 
+                flexRingTightness = 0
+                ) {
     
     frLength = length - flexRingLengthDiff;
-    r1Outer = diameterBottom;
-    r2Outer = diameterTop;
+    // flexRingOuterClearance is needed for the cutouts in the insTubes when the outer diameter isn't great enough to delete part of the insTube.
+    r1Outer = diameterBottom + flexRingOuterClearance;
+    r2Outer = diameterTop + flexRingOuterClearance;
     r1Inner = diameterBottom - insTubeClearance - flexRingDiameterDiff - flexRingTightness;
     r2Inner = diameterTop - insTubeClearance - flexRingDiameterDiff - flexRingTightness;
     
@@ -62,6 +69,7 @@ module flexRing(length, diameterBottom, diameterTop, flexRingTightness = 0) {
         echo("frLength = ", frLength);
         echo("insTubeClearance = ", insTubeClearance);
         echo("flexRingDiameterDiff = ", flexRingDiameterDiff);
+        echo("flexRingOuterClearance = ", flexRingOuterClearance);
         echo("flexRingTightness = ", flexRingTightness);
         echo("r1Outer = ", r1Outer);
         echo("r2Outer =", r2Outer);

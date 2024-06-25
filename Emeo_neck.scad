@@ -20,7 +20,8 @@ module insTubeBottom () {
             flexRing(
                         length = insTubeBottomLength,
                         diameterBottom = insTubeDiameterBottom,
-                        diameterTop = insTubeDiameterTop
+                        diameterTop = insTubeDiameterTop,
+                        flexRingOuterClearance = 3
                     );
     
     }
