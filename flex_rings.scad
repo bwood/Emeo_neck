@@ -1,7 +1,8 @@
 include <./Emeo_neck_library.scad>
 
-insTubeMpcFlexRing(
+flexRing(
                                 length = insTubeMpcLength,
                                 diameterBottom = insTubeMpcDiameterBottom,
-                                diameterTop = insTubeMpcDiameterTop
+                                diameterTop = insTubeMpcDiameterTop,
+                                flexRingTightness = flexRingTightness
                                );
