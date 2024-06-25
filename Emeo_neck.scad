@@ -4,16 +4,25 @@ include <./Emeo_neck_library.scad>
 module insTubeBottom () {
     
     difference() {
-        // Outer cylinder surface.
-        cylinder(h = insTubeBottomLength, 
-                 r1 = insTubeDiameterBottom,
-                 r2 = insTubeDiameterTop);
+        difference() {
+            // Outer cylinder surface.
+            cylinder(h = insTubeBottomLength, 
+                     r1 = insTubeDiameterBottom,
+                     r2 = insTubeDiameterTop);
 
-        // Inner cylinder surface.
-        cylinder(h = insTubeBottomLength, 
-                 r1 = insTubeDiameterInterior,
-                 r2 = insTubeDiameterInterior);
-  
+            // Inner cylinder surface.
+            cylinder(h = insTubeBottomLength, 
+                     r1 = insTubeDiameterInterior,
+                     r2 = insTubeDiameterInterior);
+      
+        }
+        translate([0, 0, flexRingLengthDiff / 2])
+            flexRing(
+                        length = insTubeBottomLength,
+                        diameterBottom = insTubeDiameterBottom,
+                        diameterTop = insTubeDiameterTop
+                    );
+    
     }
 
 }
@@ -54,10 +63,10 @@ module insTubeMpc() {
         // Cutout for the flex ring.
         translate([0, 0, flexRingLengthDiff / 2])
             flexRing(
-                                length = insTubeMpcLength,
-                                diameterBottom = insTubeMpcDiameterBottom,
-                                diameterTop = insTubeMpcDiameterTop
-                               );
+                        length = insTubeMpcLength,
+                        diameterBottom = insTubeMpcDiameterBottom,
+                        diameterTop = insTubeMpcDiameterTop
+                    );
     }
     
 }
