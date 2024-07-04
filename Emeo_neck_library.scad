@@ -33,7 +33,7 @@ insTubeMpcDiameterTop = 15.75;
 insTubeClearance = 1;
 
 // This is the length of the tube between the insTubeBottom and the insTubeMpc.
-TubeLength = 40;
+tubeLength = 40;
 
 // Flexble (NinjaFlex) ring
 // Difference in length between the insTube and the flex ring.  The ring sits inside the lips this creates in the insTube.

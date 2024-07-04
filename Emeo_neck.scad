@@ -74,9 +74,10 @@ module insTubeMpc() {
 
 module neck() {
 
-    insTubeBottom();
+    translate([0, 0, -insTubeBottomLength]) 
+        insTubeBottom();
     
-    translate([0,0,20]) 
+    translate([0, 0, tubeLength]) 
         insTubeMpc();
 }
 neck();
