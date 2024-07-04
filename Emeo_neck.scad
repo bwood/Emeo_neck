@@ -72,12 +72,31 @@ module insTubeMpc() {
     
 }
 
+// The neck tube that connects the two insTubes.
+module neckTube() {
+    rOuter = insTubeDiameterTop;
+    rInner = insTubeDiameterInterior;
+    
+    difference() {
+        cylinder(h = tubeLength,
+                 r = rOuter);
+        
+        cylinder(h = tubeLength,
+                 r = rInner);
+    }
+}
+
+// Assemble the entire neck.
 module neck() {
 
-    translate([0, 0, -insTubeBottomLength]) 
-        insTubeBottom();
+    color("LimeGreen")
+        translate([0, 0, -insTubeBottomLength]) 
+            insTubeBottom();
     
-    translate([0, 0, tubeLength]) 
-        insTubeMpc();
+    neckTube();
+    
+    color("LimeGreen")
+        translate([0, 0, tubeLength]) 
+            insTubeMpc();
 }
 neck();

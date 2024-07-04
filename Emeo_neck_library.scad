@@ -3,7 +3,7 @@
 $fn = 20;
 
 // If true, echo debug info to console.
-debug = true;
+debug = false;
 
 // Epsilon. This small value guarantees overlap and solves the warning: "Object may not be a valid 2-manifold and may need repair!"
 eps = 0.01;
