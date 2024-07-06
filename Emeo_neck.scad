@@ -94,12 +94,15 @@ module cap() {
     capRadii = [
         [0,0,0], 
         [0, capThickness, 0], 
-        [capRadius, capThickness, 1], 
-        [capRadius, 0, 1]
+        [capRadius, capThickness, 2], 
+        [capRadius, 0, 0]
     ];
-    polygon(
-        polyRound(capRadii, 30)
-    );
+    
+    rotate_extrude() {
+        polygon(
+            polyRound(capRadii, 30)
+        );
+    }
 }
 
 // Assemble the entire neck.
