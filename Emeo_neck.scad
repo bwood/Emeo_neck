@@ -94,8 +94,8 @@ module cap() {
     capRadii = [
         [0,0,0], 
         [0, capThickness, 0], 
-        [capRadius, capThickness, 2], 
-        [capRadius, 0, 0]
+        [capRadius + capThickness, capThickness, 2], 
+        [capRadius + capThickness, 0, 0]
     ];
     
     rotate_extrude() {
@@ -103,6 +103,21 @@ module cap() {
             polyRound(capRadii, 30)
         );
     }
+    
+    translate ([0, 0, -capHeight])
+        difference() { 
+            //Outer surface.
+            //+ eps to ensure connection.
+            cylinder(h = capHeight + eps,
+                     r1 = capRadius + capThickness,
+                     r2 = capRadiusBottom + capThickness
+            );
+            //Inner surface.
+            cylinder(h = capHeight + eps,
+                     r1 = capRadius,
+                     r2 = capRadiusBottom
+            );
+        }
 }
 
 // Assemble the entire neck.

@@ -16,6 +16,9 @@ eps = 0.01;
 capDiameter = 29;
 capRadius = capDiameter / 2;
 capThickness = 3.5;
+capHeight = 12.71;
+capDiameterBottom = 28;
+capRadiusBottom = capDiameterBottom / 2;
 
 // Insertion tube for Emeo recpetical,
 insTubeDiameterTop = 15.4;
