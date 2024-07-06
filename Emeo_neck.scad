@@ -1,4 +1,7 @@
 include <./Emeo_neck_library.scad>
+// https://github.com/Irev-Dev/Round-Anything
+use <../Round-Anything/polyround.scad>
+
 
 // Create the conical tube that inserts into the Emeo receptical at the top of the instrument.
 module insTubeBottom () {
@@ -86,6 +89,19 @@ module neckTube() {
     }
 }
 
+// The cap that fits around the top of the Emeo and clips onto the minuet holder.
+module cap() {
+    capRadii = [
+        [0,0,0], 
+        [0, capThickness, 0], 
+        [capRadius, capThickness, 1], 
+        [capRadius, 0, 1]
+    ];
+    polygon(
+        polyRound(capRadii, 30)
+    );
+}
+
 // Assemble the entire neck.
 module neck() {
 
@@ -99,4 +115,5 @@ module neck() {
         translate([0, 0, tubeLength]) 
             insTubeMpc();
 }
-neck();
+//neck();
+cap();

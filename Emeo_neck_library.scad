@@ -1,6 +1,10 @@
 
 // CHANGE to 100 when you create the STL.
 $fn = 20;
+// RoundAnything library
+// https://github.com/Irev-Dev/Round-Anything
+fnPolyRound = 20;
+
 
 // If true, echo debug info to console.
 debug = false;
@@ -9,7 +13,9 @@ debug = false;
 eps = 0.01;
 
 // Cap varialbes.
-capThickness = 3;
+capDiameter = 29;
+capRadius = capDiameter / 2;
+capThickness = 3.5;
 
 // Insertion tube for Emeo recpetical,
 insTubeDiameterTop = 15.4;
