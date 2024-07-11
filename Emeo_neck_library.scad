@@ -15,7 +15,7 @@ eps = 0.01;
 // Cap varialbes.
 capDiameter = 29;
 capRadius = capDiameter / 2;
-capThickness = 3.5;
+capThickness = 3;
 capHeight = 12.71;
 capDiameterBottom = 28;
 capRadiusBottom = capDiameterBottom / 2;
