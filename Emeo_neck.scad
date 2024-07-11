@@ -90,7 +90,7 @@ module neckTube() {
 }
 
 // The cap that fits around the top of the Emeo and clips onto the minuet holder.
-module cap() {
+module capWhole() {
     capRadii = [
         [0,0,0], 
         [0, capThickness, 0], 
@@ -120,6 +120,42 @@ module cap() {
         }
 }
 
+// Polygon to subtract from the cap.
+module capSubtractor () {
+    px = 20;
+    py = -5;
+    pz = px + py;
+    
+    height = capHeight + capThickness + 2;
+    
+    translate([0, 0, -capHeight - 1])
+    linear_extrude(height) {
+        union() {
+            color("LimeGreen")
+                circle(d = insTubeDiameterTop);
+            polygon(points = [
+                    [0, 0],
+                    [px, py],
+                    [-px, py]
+                ]);
+            polygon(points = [
+                    [px, py],
+                    [-px, py],
+                    [-px, py - pz],
+                    [px, py - pz],
+                ]);
+        }
+    }   
+
+}
+
+module cap() {
+    difference() {
+        capWhole();
+        capSubtractor();
+    }
+}
+
 // Assemble the entire neck.
 module neck() {
 
@@ -135,3 +171,4 @@ module neck() {
 }
 //neck();
 cap();
+
