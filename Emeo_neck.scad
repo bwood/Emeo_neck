@@ -109,15 +109,16 @@ module capWhole() {
             //Outer surface.
             //+ eps to ensure connection.
             cylinder(h = capHeight + eps,
-                     r1 = capRadius + capThickness,
-                     r2 = capRadiusBottom + capThickness
+                     r1 = capRadiusBottom + capThickness,
+                     r2 = capRadius + capThickness
             );
             //Inner surface.
             cylinder(h = capHeight + eps,
-                     r1 = capRadius,
-                     r2 = capRadiusBottom
+                     r1 = capRadiusBottom,
+                     r2 = capRadius
             );
         }
+        
 }
 
 // Polygon to subtract from the cap.

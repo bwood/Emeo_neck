@@ -19,7 +19,7 @@ capThickness = 3;
 capHeight1 = 12.73;
 // Add height to extend below the minuet holder.
 capHeight = capHeight1 + 4;
-capDiameterBottom = 28;
+capDiameterBottom = 26.8;
 capRadiusBottom = capDiameterBottom / 2;
 
 // Insertion tube for Emeo recpetical,
