@@ -169,6 +169,6 @@ module neck() {
         translate([0, 0, tubeLength]) 
             insTubeMpc();
 }
-neck();
+//neck();
 cap();
 

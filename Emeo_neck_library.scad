@@ -16,7 +16,9 @@ eps = 0.01;
 capDiameter = 29;
 capRadius = capDiameter / 2;
 capThickness = 3;
-capHeight = 12.71;
+capHeight1 = 12.73;
+// Add height to extend below the minuet holder.
+capHeight = capHeight1 + 4;
 capDiameterBottom = 28;
 capRadiusBottom = capDiameterBottom / 2;
 
