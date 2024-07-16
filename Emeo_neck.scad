@@ -77,15 +77,15 @@ module insTubeMpc() {
 
 // The neck tube that connects the two insTubes.
 module neckTube() {
-    rOuter = insTubeDiameterTop;
-    rInner = insTubeDiameterInterior;
+    dOuter = insTubeDiameterTop;
+    dInner = insTubeDiameterInterior;
     
     difference() {
         cylinder(h = tubeLength,
-                 r = rOuter);
+                 d = dOuter);
         
         cylinder(h = tubeLength,
-                 r = rInner);
+                 d = dInner);
     }
 }
 
@@ -169,6 +169,6 @@ module neck() {
         translate([0, 0, tubeLength]) 
             insTubeMpc();
 }
-//neck();
+neck();
 cap();
 

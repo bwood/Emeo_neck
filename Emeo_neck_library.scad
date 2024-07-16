@@ -22,6 +22,7 @@ capRadiusBottom = capDiameterBottom / 2;
 
 // Insertion tube for Emeo recpetical,
 insTubeDiameterTop = 15.4;
+insTubeRadiusTop = insTubeDiameterTop / 2;
 insTubeDiameterBottom = 14.72;
 
 insTubeMouthpieceDiameterTop = 15;
