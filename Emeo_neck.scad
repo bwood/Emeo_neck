@@ -91,10 +91,12 @@ module neckTube() {
 
 // The cap that fits around the top of the Emeo and clips onto the minuet holder.
 module capWhole() {
+    capThicknessTop = capThickness * 2;
+    
     capRadii = [
         [0,0,0], 
-        [0, capThickness, 0], 
-        [capRadius + capThickness, capThickness, 2], 
+        [0, capThicknessTop, 0], 
+        [capRadius + capThicknessTop, capThickness, 2], 
         [capRadius + capThickness, 0, 0]
     ];
     
@@ -127,7 +129,7 @@ module capSubtractor () {
     py = -5;
     pz = px + py;
     
-    height = capHeight + capThickness + 2;
+    height = capHeight + (capThickness * 2) + 2;
     
     translate([0, 0, -capHeight - 1])
     linear_extrude(height) {
