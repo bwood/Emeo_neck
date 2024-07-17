@@ -10,13 +10,13 @@ module insTubeBottom () {
         difference() {
             // Outer cylinder surface.
             cylinder(h = insTubeBottomLength, 
-                     r1 = insTubeDiameterBottom,
-                     r2 = insTubeDiameterTop);
+                     d1 = insTubeDiameterBottom,
+                     d2 = insTubeDiameterTop);
 
             // Inner cylinder surface.
             cylinder(h = insTubeBottomLength, 
-                     r1 = insTubeDiameterInterior,
-                     r2 = insTubeDiameterInterior);
+                     d1 = insTubeDiameterInterior,
+                     d2 = insTubeDiameterInterior);
       
         }
         translate([0, 0, flexRingLengthDiff / 2])
@@ -34,10 +34,10 @@ module insTubeBottom () {
 // Create the conical tube that inserts into the mouthpiece.
 module insTubeMpc() {
     
-    r1Outer = insTubeMpcDiameterBottom - insTubeClearance;
-    r2Outer = insTubeMpcDiameterTop - insTubeClearance;
+    d1Outer = insTubeMpcDiameterBottom - insTubeClearance;
+    d2Outer = insTubeMpcDiameterTop - insTubeClearance;
     
-    rInner = insTubeDiameterInterior;
+    dInner = insTubeDiameterInterior;
     
     
     if (debug) {
@@ -45,9 +45,9 @@ module insTubeMpc() {
         echo("Function: insTubeMpc");
         echo("insTubeMpcLength = ", insTubeMpcLength);
         echo("insTubeClearance = ", insTubeClearance);
-        echo("r1Outer = ", r1Outer);
-        echo("r2Outer =", r2Outer);
-        echo("rInner = ", rInner);
+        echo("d1Outer = ", d1Outer);
+        echo("d2Outer =", d2Outer);
+        echo("dInner = ", dInner);
         
     }
 
@@ -55,12 +55,12 @@ module insTubeMpc() {
         difference() {
             // Outer cylinder surface.
             cylinder(h = insTubeMpcLength, 
-                     r1 = r1Outer,
-                     r2 = r2Outer);
+                     d1 = d1Outer,
+                     d2 = d2Outer);
   
           // Inner cylinder surface
             cylinder(h = insTubeMpcLength, 
-                     r = rInner);
+                     d = dInner);
            
         }
         
@@ -170,6 +170,6 @@ module neck() {
         translate([0, 0, tubeLength]) 
             insTubeMpc();
 }
-//neck();
+neck();
 cap();
 

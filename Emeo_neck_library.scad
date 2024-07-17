@@ -70,10 +70,10 @@ module flexRing(
     
     frLength = length - flexRingLengthDiff;
     // flexRingOuterClearance is needed for the cutouts in the insTubes when the outer diameter isn't great enough to delete part of the insTube.
-    r1Outer = diameterBottom + flexRingOuterClearance;
-    r2Outer = diameterTop + flexRingOuterClearance;
-    r1Inner = diameterBottom - insTubeClearance - flexRingDiameterDiff - flexRingTightness;
-    r2Inner = diameterTop - insTubeClearance - flexRingDiameterDiff - flexRingTightness;
+    d1Outer = diameterBottom + flexRingOuterClearance;
+    d2Outer = diameterTop + flexRingOuterClearance;
+    d1Inner = diameterBottom - insTubeClearance - flexRingDiameterDiff - flexRingTightness;
+    d2Inner = diameterTop - insTubeClearance - flexRingDiameterDiff - flexRingTightness;
     
     if (debug) {
         echo("");
@@ -83,22 +83,22 @@ module flexRing(
         echo("flexRingDiameterDiff = ", flexRingDiameterDiff);
         echo("flexRingOuterClearance = ", flexRingOuterClearance);
         echo("flexRingTightness = ", flexRingTightness);
-        echo("r1Outer = ", r1Outer);
-        echo("r2Outer =", r2Outer);
-        echo("r1Inner = ", r1Inner);
-        echo("r2Inner = ", r2Inner);
+        echo("d1Outer = ", d1Outer);
+        echo("d2Outer =", d2Outer);
+        echo("d1Inner = ", d1Inner);
+        echo("d2Inner = ", d2Inner);
     }
     
     difference() {
         // Outer surface.
         cylinder(h = frLength,
-                 r1 = r1Outer,
-                 r2 = r2Outer);
+                 d1 = d1Outer,
+                 d2 = d2Outer);
         //Inner surface.
         // TODO: should flexRingThickness be subtracted? w/out this we are at surface of insTube
         cylinder(h = frLength,
-                 r1 = r1Inner,
-                 r2 = r2Inner);
+                 d1 = d1Inner,
+                 d2 = d2Inner);
     }
 
 }
