@@ -89,15 +89,14 @@ module neckTube() {
     }
 }
 
-// The cap that fits around the top of the Emeo and clips onto the minuet holder.
-module capWhole() {
-    capThicknessTop = capThickness * 2;
+module capDisc(thickness, radius) {
+    capThicknessTop = thickness;
     
     capRadii = [
         [0,0,0], 
         [0, capThicknessTop, 0], 
-        [capRadius + capThicknessTop, capThickness, 2], 
-        [capRadius + capThickness, 0, 0]
+        [radius + capThickness, capThicknessTop, 2], 
+        [radius + capThickness, 0, 0]
     ];
     
     rotate_extrude() {
@@ -105,6 +104,13 @@ module capWhole() {
             polyRound(capRadii, 30)
         );
     }
+    
+}
+
+// The cap that fits around the top of the Emeo and clips onto the minuet holder.
+module capWhole() {
+    
+    capDisc(thickness = capThickness * 2, radius = capRadius);
     
     translate ([0, 0, -capHeight])
         difference() { 
@@ -166,6 +172,8 @@ module neck() {
         translate([0, 0, -insTubeBottomLength]) 
             insTubeBottom();
     
+    capDisc(thickness = capThickness, radius = capRadius - capThickness);
+    
     neckTube();
     
     color("LimeGreen")
@@ -173,5 +181,5 @@ module neck() {
             insTubeMpc();
 }
 neck();
-cap();
+//cap();
 
