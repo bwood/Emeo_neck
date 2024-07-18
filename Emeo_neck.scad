@@ -111,15 +111,15 @@ module disc(thickness, radius) {
 module spoke(angle, radius, discThickness) {
     z = discThickness;
     
-    echo("spoke: angle=", angle);
-    echo("spoke: radius=", radius);
-    echo("spoke: z=", z);
-    
+    if (debug) {
+        echo("spoke: angle=", angle);
+        echo("spoke: radius=", radius);
+        echo("spoke: z=", z);
+    }
 
     rotate([0, 0, angle])
         translate([radius / 2, 0, z])
-        rotate([0, 90, 0])
-//            rotate([0, 90, 0]) 
+            rotate([0, 90, 0])
                 cylinder(h = radius, d = spokeDiameter, center = true);
 }
 
@@ -184,7 +184,16 @@ module capSubtractor () {
 
 module cap() {
     difference() {
-        capWhole();
+        difference() {
+            // Create the spokes imprint on the underside of the cap disc.
+            capWhole();
+            discSpokes(
+                thickness = capThickness,
+                radius = capRadius - capThickness,
+                numSpokes = numSpokes
+            );
+        }
+        // Remove the side of the cap so that it can snap on the Emeo.
         capSubtractor();
     }
 }
@@ -207,9 +216,6 @@ module neck() {
             insTubeMpc();
 }
 //neck();
-//cap();
-    discSpokes(thickness = capThickness, 
-              radius = capRadius - capThickness,
-              numSpokes = 30);
-
+cap();
+    
 
