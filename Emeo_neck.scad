@@ -89,7 +89,8 @@ module neckTube() {
     }
 }
 
-module capDisc(thickness, radius) {
+//
+module disc(thickness, radius) {
     capThicknessTop = thickness;
     
     capRadii = [
@@ -107,10 +108,33 @@ module capDisc(thickness, radius) {
     
 }
 
+module spoke(angle, radius, discThickness) {
+    z = discThickness;
+    
+    echo("spoke: angle=", angle);
+    echo("spoke: radius=", radius);
+    echo("spoke: z=", z);
+    
+
+    rotate([0, 0, angle])
+        translate([radius / 2, 0, z])
+        rotate([0, 90, 0])
+//            rotate([0, 90, 0]) 
+                cylinder(h = radius, d = spokeDiameter, center = true);
+}
+
+module discSpokes(thickness, radius, numSpokes) {
+    disc(thickness = thickness, radius = radius);
+    
+    for (i = [0 : 360 / numSpokes : 360 - 360 / numSpokes]) {
+        spoke(angle = i, radius = radius, discThickness = thickness);
+    }
+}
+
 // The cap that fits around the top of the Emeo and clips onto the minuet holder.
 module capWhole() {
     
-    capDisc(thickness = capThickness * 2, radius = capRadius);
+    disc(thickness = capThickness * 2, radius = capRadius);
     
     translate ([0, 0, -capHeight])
         difference() { 
@@ -172,7 +196,9 @@ module neck() {
         translate([0, 0, -insTubeBottomLength]) 
             insTubeBottom();
     
-    capDisc(thickness = capThickness, radius = capRadius - capThickness);
+    discSpokes(thickness = capThickness, 
+              radius = capRadius - capThickness,
+              numSpokes = 4);
     
     neckTube();
     
@@ -180,6 +206,10 @@ module neck() {
         translate([0, 0, tubeLength]) 
             insTubeMpc();
 }
-neck();
+//neck();
 //cap();
+    discSpokes(thickness = capThickness, 
+              radius = capRadius - capThickness,
+              numSpokes = 30);
+
 
