@@ -90,13 +90,13 @@ module neckTube() {
 }
 
 //
-module disc(thickness, radius) {
+module disc(thickness, radius, pRound = 2) {
     capThicknessTop = thickness;
     
     capRadii = [
         [0,0,0], 
         [0, capThicknessTop, 0], 
-        [radius + capThickness, capThicknessTop, 2], 
+        [radius + capThickness, capThicknessTop, pRound], 
         [radius + capThickness, 0, 0]
     ];
     
@@ -182,6 +182,7 @@ module capSubtractor () {
 
 }
 
+// The assembled cap.
 module cap() {
     difference() {
         difference() {
@@ -198,16 +199,35 @@ module cap() {
     }
 }
 
-// Assemble the entire neck.
+// The cap insert for the neck.
+module neckCap() {
+    offset = 4;
+    
+    difference() {
+        discSpokes(
+                  thickness = capThickness, 
+                  radius = capRadius - capThickness,
+                  numSpokes = numSpokes); 
+        
+        translate([0, 0, -offset / 2])
+            disc(
+                thickness = capThickness + offset,
+                radius = insTubeDiameterInterior / 2,
+                pRound = 0
+                );      
+    }   
+}
+
+// The assembled neck.
 module neck() {
 
+//todo eps
+    
     color("LimeGreen")
         translate([0, 0, -insTubeBottomLength]) 
             insTubeBottom();
     
-    discSpokes(thickness = capThickness, 
-              radius = capRadius - capThickness,
-              numSpokes = 4);
+    neckCap();
     
     neckTube();
     
@@ -215,7 +235,9 @@ module neck() {
         translate([0, 0, tubeLength]) 
             insTubeMpc();
 }
-//neck();
+neck();
+
+translate([0, 0, 65])
 cap();
     
 
