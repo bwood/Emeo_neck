@@ -201,7 +201,7 @@ module cap() {
 }
 
 // The cap insert for the neck.
-module neckCap() {
+module neckDisc() {
     offset = 4;
     
     difference() {
@@ -226,7 +226,7 @@ module neck() {
         translate([0, 0, -insTubeBottomLength]) 
             insTubeBottom();
     
-    neckCap();
+    neckDisc();
     
     translate([0, 0, -eps])
         neckTube();
