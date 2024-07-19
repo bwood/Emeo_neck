@@ -82,7 +82,8 @@ module neckTube() {
     
     difference() {
         cylinder(h = tubeLength,
-                 d = dOuter);
+                 d1 = dOuter,
+                 d2 = insTubeMpcDiameterBottom - insTubeClearance);
         
         cylinder(h = tubeLength,
                  d = dInner);
@@ -237,7 +238,7 @@ module neck() {
 }
 neck();
 
-translate([0, 0, 65])
+translate([0, 0, 0])       
 cap();
     
 
