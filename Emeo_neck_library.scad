@@ -29,7 +29,7 @@ numSpokes = 30;
 // Insertion tube for Emeo recpetical,
 insTubeDiameterTop = 15.4;
 insTubeRadiusTop = insTubeDiameterTop / 2;
-insTubeDiameterBottom = 14.72;
+insTubeDiameterBottom = 14.4;
 
 insTubeMouthpieceDiameterTop = 15;
 insTubeDiameterInterior = 4;

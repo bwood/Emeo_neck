@@ -221,8 +221,6 @@ module neckCap() {
 
 // The assembled neck.
 module neck() {
-
-//todo eps
     
     color("LimeGreen")
         translate([0, 0, -insTubeBottomLength]) 
@@ -230,10 +228,11 @@ module neck() {
     
     neckCap();
     
-    neckTube();
+    translate([0, 0, -eps])
+        neckTube();
     
     color("LimeGreen")
-        translate([0, 0, tubeLength]) 
+        translate([0, 0, tubeLength - eps]) 
             insTubeMpc();
 }
 neck();
