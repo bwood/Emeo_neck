@@ -1,6 +1,6 @@
 
 // CHANGE to 100 when you create the STL.
-$fn = 20;
+$fn = 100;
 // RoundAnything library
 // https://github.com/Irev-Dev/Round-Anything
 fnPolyRound = 20;
