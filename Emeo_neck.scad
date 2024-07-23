@@ -76,16 +76,16 @@ module insTubeMpc() {
 }
 
 // The neck tube that connects the two insTubes.
-module neckTube() {
+module neckTube(length=capThickness * 2) {
     dOuter = insTubeDiameterTop;
     dInner = insTubeDiameterInterior;
     
     difference() {
-        cylinder(h = tubeLength,
+        cylinder(h = length,
                  d1 = dOuter,
                  d2 = insTubeMpcDiameterBottom - insTubeClearance);
         
-        cylinder(h = tubeLength,
+        cylinder(h = length,
                  d = dInner);
     }
 }
@@ -222,6 +222,8 @@ module neckDisc() {
 // The assembled neck.
 module neck() {
     
+    tubeLength = (capThickness * 2) + 6;
+    
     color("LimeGreen")
         translate([0, 0, -insTubeBottomLength]) 
             insTubeBottom();
@@ -229,15 +231,16 @@ module neck() {
     neckDisc();
     
     translate([0, 0, -eps])
-        neckTube();
+        neckTube(length = tubeLength);
     
     color("LimeGreen")
         translate([0, 0, tubeLength - eps]) 
             insTubeMpc();
 }
+
 neck();
 
-translate([0, 0, 10])       
+translate([0, 0, 0])       
 cap();
     
 
