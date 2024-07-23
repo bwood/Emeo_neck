@@ -75,22 +75,7 @@ module insTubeMpc() {
     
 }
 
-// The neck tube that connects the two insTubes.
-module neckTube(length=capThickness * 2) {
-    dOuter = insTubeDiameterTop;
-    dInner = insTubeDiameterInterior;
-    
-    difference() {
-        cylinder(h = length,
-                 d1 = dOuter,
-                 d2 = insTubeMpcDiameterBottom - insTubeClearance);
-        
-        cylinder(h = length,
-                 d = dInner);
-    }
-}
-
-//
+// Disc object.  Top of cap and neck disc.
 module disc(thickness, radius, pRound = 2) {
     capThicknessTop = thickness;
     
@@ -219,10 +204,25 @@ module neckDisc() {
     }   
 }
 
-// The assembled neck.
+// The neck tube that connects the two insTubes.
+module neckTube(length=capThickness * 2) {
+    dOuter = insTubeDiameterTop;
+    dInner = insTubeDiameterInterior;
+    
+    difference() {
+        cylinder(h = length,
+                 d1 = dOuter,
+                 d2 = insTubeMpcDiameterBottom - insTubeClearance);
+        
+        cylinder(h = length,
+                 d = dInner);
+    }
+}
+
+// The assembled standard neck.
 module neck() {
     
-    tubeLength = (capThickness * 2) + 6;
+    tubeLength = tubeLength + 6 ;
     
     color("LimeGreen")
         translate([0, 0, -insTubeBottomLength]) 
@@ -238,9 +238,51 @@ module neck() {
             insTubeMpc();
 }
 
-neck();
+module cylindarBend(xpoint, diameter, angle) {
+  rotate_extrude(angle=angle, convexity=10)
+    translate([xpoint, 0])
+        circle(d = diameter);
 
-translate([0, 0, 0])       
-cap();
+}
+
+module tubeBend() {
+    difference() {
+        cylindarBend(xpoint = cbXpoint,
+                     diameter = insTubeDiameterTop,
+                     angle = cbAngle);
+        
+        cylindarBend(xpoint = cbXpoint,
+                     diameter = insTubeDiameterInterior,
+                     angle = cbAngle);
+    }
+    
+}
+
+module neckBent() {
+    
+    tubeLength = tubeLength + 6;
+    
+    color("LimeGreen")
+        translate([0, 0, -insTubeBottomLength]) 
+            insTubeBottom();
+    
+    neckDisc();
+
+    translate([0, 0, -eps])
+    neckTube(length = tubeLength);
+    
+    translate([0, cbXpoint, tubeLength - (eps * 2)])
+        rotate([90, 0, -90])
+            tubeBend();
+    
+//    color("LimeGreen")
+//        translate([0, 0, 20]) 
+//            insTubeMpc();
+}
+
+neckBent();
+
+//translate([0, 0, 0])       
+//cap();
     
 

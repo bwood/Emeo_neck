@@ -48,6 +48,14 @@ insTubeMpcDiameterTop = 15.75;
 // Contact will be made by the flexible rings.
 insTubeClearance = 1;
 
+// Tube variables.
+tubeLength = (capThickness * 2);
+
+// Tube bend variables.
+// xpoint determines the length of the arc of the bent part.
+cbXpoint = 10;
+cbAngle = 70;
+
 
 // Flexble (NinjaFlex) ring
 // Difference in length between the insTube and the flex ring.  The ring sits inside the lips this creates in the insTube.
