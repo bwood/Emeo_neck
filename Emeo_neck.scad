@@ -258,6 +258,16 @@ module tubeBend() {
     
 }
 
+module neckBentTop() {
+  
+    neckTube(length = tubeLength);
+    
+    color("LimeGreen")
+        translate([0, 0, tubeLength - eps]) 
+            insTubeMpc();
+
+}
+
 module neckBent() {
     
     tubeLength = tubeLength + 6;
@@ -275,14 +285,20 @@ module neckBent() {
         rotate([90, 0, -90])
             tubeBend();
     
-//    color("LimeGreen")
-//        translate([0, 0, 20]) 
-//            insTubeMpc();
+    // Position the top section.
+    translate([0, -10.5, insTubeDiameterTop - 0.25])
+        rotate([-cbAngle, 0, 0])
+            translate([0, 0, tubeLength +6 - (eps * 2)])
+                neckBentTop();    
+
 }
 
+translate([80, 0, 0])
 neckBent();
 
-//translate([0, 0, 0])       
-//cap();
+translate([40, 0, 0])
+neck();
+     
+cap();
     
 
