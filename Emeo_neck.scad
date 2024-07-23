@@ -235,9 +235,9 @@ module neck() {
         translate([0, 0, tubeLength - eps]) 
             insTubeMpc();
 }
-//neck();
+neck();
 
-translate([0, 0, 0])       
+translate([0, 0, 10])       
 cap();
     
 

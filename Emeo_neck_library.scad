@@ -23,8 +23,8 @@ capDiameterBottom = 26.8;
 capRadiusBottom = capDiameterBottom / 2;
 
 // Spoke variables.
-spokeDiameter = 1;
-numSpokes = 30;
+spokeDiameter = 2;
+numSpokes = 25;
 
 // Insertion tube for Emeo recpetical,
 insTubeDiameterTop = 15.4;
