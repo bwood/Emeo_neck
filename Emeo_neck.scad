@@ -293,11 +293,12 @@ module neckBent() {
 
 }
 
+
 translate([80, 0, 0])
-neckBent();
+    neckBent();
 
 translate([40, 0, 0])
-neck();
+    neck();
      
 cap();
     
