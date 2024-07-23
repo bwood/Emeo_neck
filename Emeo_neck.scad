@@ -157,7 +157,7 @@ module capWhole() {
 // Polygon to subtract from the cap.
 module capSubtractor () {
     px = 20;
-    py = -5;
+    py = -10;
     pz = px + py;
     
     height = capHeight + (capThickness * 2) + 2;
@@ -235,7 +235,7 @@ module neck() {
         translate([0, 0, tubeLength - eps]) 
             insTubeMpc();
 }
-neck();
+//neck();
 
 translate([0, 0, 0])       
 cap();
