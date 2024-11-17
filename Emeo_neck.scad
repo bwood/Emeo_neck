@@ -234,7 +234,7 @@ module neck() {
         neckTube(length = tubeLength);
     
     color("LimeGreen")
-        translate([0, 0, tubeLength - eps]) 
+        translate([0, 0, tubeLength - (eps * 2)]) 
             insTubeMpc();
 }
 
@@ -259,47 +259,45 @@ module tubeBend() {
 }
 
 module neckBentTop() {
-  
+  union() {
     neckTube(length = tubeLength);
     
     color("LimeGreen")
         translate([0, 0, tubeLength - eps]) 
             insTubeMpc();
-
+  }
 }
 
 module neckBent() {
     
     tubeLength = tubeLength + 6;
     
-    color("LimeGreen")
-        translate([0, 0, -insTubeBottomLength]) 
-            insTubeBottom();
-    
-    neckDisc();
+    union() {
+        color("LimeGreen")
+            translate([0, 0, -insTubeBottomLength]) 
+                insTubeBottom();
+        
+        neckDisc();
 
-    translate([0, 0, -eps])
-    neckTube(length = tubeLength);
-    
-    translate([0, cbXpoint, tubeLength - (eps * 2)])
-        rotate([90, 0, -90])
-            tubeBend();
-    
-    // Position the top section.
-    translate([0, -10.5, insTubeDiameterTop - 0.25])
-        rotate([-cbAngle, 0, 0])
-            translate([0, 0, tubeLength +6 - (eps * 2)])
-                neckBentTop();    
+        translate([0, 0, -eps])
+        neckTube(length = tubeLength);
+        
+        translate([0, cbXpoint, tubeLength - (eps * 2)])
+            rotate([90, 0, -90])
+                tubeBend();
+        
+        // Position the top section.
+        translate([0, -10.5, insTubeDiameterTop - 0.25])
+            rotate([-cbAngle, 0, 0])
+                translate([0, 0, tubeLength +6 - (eps * 2)])
+                    neckBentTop();    
+    }
 
 }
 
 
-translate([80, 0, 0])
-    neckBent();
 
-translate([40, 0, 0])
-    neck();
+//neckBent();
+//neck();
      
 cap();
-    
-
