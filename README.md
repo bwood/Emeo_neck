@@ -2,15 +2,7 @@ Emeo Neck
 
 # Motivation
 
-A better-fitting and more ergonomic neck for the Emeo electronic saxophone.
-
-# Printing
-
-The .3mf files included here were imported in Bambu Studio and printed with a Bambu Lab X1 Carbon printer with a 0.4 nozzle.
-
-## Exporting to STL, 3MF
-
-If F6 rendering on OpenSCAD is too slow you can comment all but on object, render and then export. Then repeat for the other objects.
+Better-fitting and more ergonomic neck alternatives for the Emeo electronic saxophone.
 
 ## The neck pieces
 
