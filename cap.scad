@@ -60,12 +60,12 @@ module capClip() {
         cylinder(h = (capThickness * 2)  + topToMinuetBottom + extra,
                  r = capRadius + capThickness + extra
                  );
-    }
+   }
     translate([0, 0, -capHeight - eps])
       cylinder(h = capHeight - topToMinuetBottom - clipThickness + eps,
                r = capRadius + capThickness + extra
                );
-  }
+ }
 }
 
 // The assembled cap.
@@ -85,5 +85,5 @@ module cap() {
     }
 }
 
-// cap();
+//cap();
 capClip();

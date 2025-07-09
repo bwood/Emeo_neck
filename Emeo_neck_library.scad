@@ -20,7 +20,7 @@ capRadius = capDiameter / 2;
 capThickness = 3;
 capHeight1 = 12.73;
 // Add height to extend below the minuet holder.
-capHeightBelow = 10;
+capHeightBelow = 20;
 // Total cap height.
 capHeight = capHeight1 + capHeightBelow;
 capDiameterBottom = 26.8;
@@ -29,7 +29,7 @@ capRadiusBottom = capDiameterBottom / 2;
 // Cap clip variables.
 // Instrument top to below minuet holder.
 topToMinuetBottom = 3.3 + 9.7;
-clipThickness = 4;
+clipThickness = 10;
 
 // Spoke variables.
 spokeDiameter = 2;
