@@ -2,7 +2,7 @@
 use <../Round-Anything/polyround.scad>
 
 // CHANGE to 100 when you create the STL.
-$fn = 100;
+$fn = 20;
 // RoundAnything library
 // https://github.com/Irev-Dev/Round-Anything
 fnPolyRound = 20;
@@ -33,9 +33,13 @@ capRadiusBottom = capDiameterBottom / 2;
 ////////////////////////
 // Instrument top to below minuet holder.
 clipThickness = capThickness;
-// clip will use the same top and bottom diameters,
-clipDiameter = 26.7;
 
+// Difference between cap
+clipRadiusOffset = clipThickness - (capThickness / 3);
+// clip will use the same top and bottom radii.
+clipRadius = capRadiusBottom + clipRadiusOffset;
+// Distance above bottom of cap where the clip should end
+clipBottomOffset = 4;
 topToMinuetBottom = 3.3 + 9.7;
 
 /////////////////////
