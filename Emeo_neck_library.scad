@@ -14,9 +14,11 @@ debug = false;
 // Epsilon. This small value guarantees overlap and solves the warning: "Object may not be a valid 2-manifold and may need repair!"
 eps = 0.01;
 
-// Cap varialbes.
+///////////////////
+// Cap varialbes //
+///////////////////
 capDiameter = 29;
-capRadius = capDiameter / 2;
+capRadiusTop = capDiameter / 2;
 capThickness = 3;
 capHeight1 = 12.73;
 // Add height to extend below the minuet holder.
@@ -26,12 +28,19 @@ capHeight = capHeight1 + capHeightBelow;
 capDiameterBottom = 26.8;
 capRadiusBottom = capDiameterBottom / 2;
 
-// Cap clip variables.
+////////////////////////
+// Cap clip variables //
+////////////////////////
 // Instrument top to below minuet holder.
-topToMinuetBottom = 3.3 + 9.7;
-clipThickness = 10;
+clipThickness = capThickness;
+// clip will use the same top and bottom diameters,
+clipDiameter = 26.7;
 
-// Spoke variables.
+topToMinuetBottom = 3.3 + 9.7;
+
+/////////////////////
+// Spoke variables //
+/////////////////////
 spokeDiameter = 2;
 numSpokes = 25;
 
@@ -258,7 +267,7 @@ module neckDisc() {
     difference() {
         discSpokes(
                   thickness = capThickness,
-                  radius = capRadius - capThickness,
+                  radius = capRadiusTop - capThickness,
                   numSpokes = numSpokes);
 
         translate([0, 0, -offset / 2])
@@ -275,22 +284,22 @@ module neckDisc() {
 /////////
 
 // The cap that fits around the top of the Emeo and clips onto the minuet holder.
-module capWhole() {
+module capWhole(radiusBottom,radiusTop) {
 
-    disc(thickness = capThickness * 2, radius = capRadius);
+    disc(thickness = capThickness * 2, radius = capRadiusTop);
 
     translate ([0, 0, -capHeight])
         difference() {
             //Outer surface.
             //+ eps to ensure connection.
             cylinder(h = capHeight + eps,
-                     r1 = capRadiusBottom + capThickness,
-                     r2 = capRadius + capThickness
+                     r1 = radiusBottom + capThickness,
+                     r2 = radiusTop + capThickness
             );
             //Inner surface.
             cylinder(h = capHeight + eps,
                      r1 = capRadiusBottom,
-                     r2 = capRadius
+                     r2 = capRadiusTop
             );
         }
 
@@ -326,14 +335,14 @@ module capSubtractor () {
 }
 
 // The assembled cap.
-module cap() {
+module cap(radiusBottom,radiusTop){
     difference() {
         difference() {
             // Create the spokes imprint on the underside of the cap disc.
-            capWhole();
+            capWhole(radiusBottom, radiusTop);
             discSpokes(
                 thickness = capThickness,
-                radius = capRadius - capThickness,
+                radius = capRadiusTop - capThickness,
                 numSpokes = numSpokes
             );
         }

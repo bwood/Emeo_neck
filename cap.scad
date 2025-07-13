@@ -1,3 +1,3 @@
 include <./Emeo_neck_library.scad>
 
-cap();
+cap(capRadiusBottom, capRadiusTop);
