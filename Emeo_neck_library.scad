@@ -31,7 +31,6 @@ capRadiusBottom = capDiameterBottom / 2;
 ////////////////////////
 // Cap clip variables //
 ////////////////////////
-// Instrument top to below minuet holder.
 clipThickness = capThickness;
 
 // Difference between cap
@@ -40,6 +39,7 @@ clipRadiusOffset = clipThickness - (capThickness / 3);
 clipRadius = capRadiusBottom + clipRadiusOffset;
 // Distance above bottom of cap where the clip should end
 clipBottomOffset = 4;
+// Instrument top to bottom of minuet holder.
 topToMinuetBottom = 3.3 + 9.7;
 
 /////////////////////
@@ -301,9 +301,10 @@ module capWhole(radiusBottom,radiusTop) {
                      r2 = radiusTop + capThickness
             );
             //Inner surface.
+
             cylinder(h = capHeight + eps,
-                     r1 = capRadiusBottom,
-                     r2 = capRadiusTop
+                     r1 = radiusBottom,
+                     r2 = radiusTop
             );
         }
 
@@ -353,4 +354,23 @@ module cap(radiusBottom,radiusTop){
         // Remove the side of the cap so that it can snap on the Emeo.
         capSubtractor();
     }
+}
+
+// A clip to secure the cap
+module capClip() {
+
+  extra = 10;
+  difference() {
+    difference() {
+      cap(clipRadius,clipRadius);
+      translate([0, 0, -topToMinuetBottom])
+        cylinder(h = (clipThickness * 2)  + topToMinuetBottom + extra,
+                 r = clipRadius + clipThickness + extra
+                 );
+   }
+   translate([0, 0, -capHeight - eps])
+      cylinder(h = clipBottomOffset,
+               r = clipRadius + clipThickness + extra
+               );
+ }
 }
